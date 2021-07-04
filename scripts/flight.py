@@ -10,8 +10,8 @@ pg_pasword = 'A123456b'
 
 def get_token():
     urloi = "https://test.api.amadeus.com/v1/security/oauth2/token"
-    api_key = ""
-    api_secret = ""
+    api_key = "hxvdTzowJ2ReK0AHRBLeJpZr5qrMfXht"
+    api_secret = "NMZxH6V7cdhmVf6A"
     data = {'grant_type': 'client_credentials',
             'client_id': api_key,
             'client_secret': api_secret}
@@ -34,13 +34,13 @@ def flight(origin, destination, departureDate, returnDate, adults, children, inf
         data = '3003'
     else:
         access_token = get_token()
-        url2 = "https://test.api.amadeus.com/v1/shopping/flight-offers"
+        url2 = "https://test.api.amadeus.com/v2/shopping/flight-offers"
         query = {}
         if(origin != None or origin == ""):
-            query["origin"] = origin
+            query["originLocationCode"] = origin
         
         if(destination != None or destination == ""):
-            query["destination"] = destination
+            query["destinationLocationCode"] = destination
         
         if(departureDate != None or departureDate == ""):
             query["departureDate"] = departureDate
@@ -65,4 +65,5 @@ def flight(origin, destination, departureDate, returnDate, adults, children, inf
             r = s.get(url2)
             r.raise_for_status()
             data = r.json()
+
     return data
